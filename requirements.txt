@@ -7,3 +7,4 @@ Pillow
 scikit-image
 python-bidi
 PyYAML
+albumentations
