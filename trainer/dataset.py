@@ -33,7 +33,7 @@ def adjust_contrast_grey(img, target=0.4):
     return img
 
 
-transforms = A.Compose(
+alb_transforms = A.Compose(
     [
         A.OpticalDistortion(
             distort_limit=0.2, shift_limit=0.2, interpolation=cv2.INTER_AREA, p=0.1
@@ -246,12 +246,12 @@ class OCRDataset(Dataset):
 
         if self.opt.rgb:
             img = np.array(Image.open(img_fpath))
-            img = Image.fromarray(transforms(image=img)["image"]).convert(
+            img = Image.fromarray(alb_transforms(image=img)["image"]).convert(
                 "RGB"
             )  # for color image
         else:
             img = np.array(Image.open(img_fpath))
-            img = Image.fromarray(transforms(image=img)["image"]).convert("L")
+            img = Image.fromarray(alb_transforms(image=img)["image"]).convert("L")
 
         if not self.opt.sensitive:
             label = label.lower()
