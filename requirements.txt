@@ -1,10 +1,9 @@
 torch
 torchvision>=0.5
-opencv-python-headless
 scipy
 numpy
 Pillow
 scikit-image
 python-bidi
 PyYAML
-albumentations
+albumentations==1.1.0
