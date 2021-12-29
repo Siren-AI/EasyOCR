@@ -5,7 +5,7 @@ import six
 import math
 import torch
 import pandas as pd
-
+import cv2
 from natsort import natsorted
 from PIL import Image
 import numpy as np
@@ -245,7 +245,10 @@ class OCRDataset(Dataset):
         label = self.df.at[index, "words"]
 
         if self.opt.rgb:
-            img = Image.open(img_fpath).convert("RGB")  # for color image
+            img = np.array(Image.open(img_fpath))
+            img = Image.fromarray(transforms(image=img)["image"]).convert(
+                "RGB"
+            )  # for color image
         else:
             img = np.array(Image.open(img_fpath))
             img = Image.fromarray(transforms(image=img)["image"]).convert("L")
